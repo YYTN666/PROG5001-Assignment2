@@ -75,8 +75,8 @@ public class StudentMarkSystem
                     double totalMark = assignment1 + assignment2 + assignment3;
                     System.out.println("Student " + (lineCount - 2) + " Name: " + studentName);
                     System.out.println("Student " + (lineCount - 2) + " ID: " + studentID);
-                    System.out.print("Assignment1: " + assignment1 + "  ");
-                    System.out.print("Assignment2: " + assignment2+ "  ");
+                    System.out.print("Assignment1: " + assignment1 + ", ");
+                    System.out.print("Assignment2: " + assignment2+ ", ");
                     System.out.println("Assignment3: " + assignment3);
                     System.out.println("Totals: " + totalMark);
                     System.out.println();
@@ -89,7 +89,7 @@ public class StudentMarkSystem
             }
         }
         catch (FileNotFoundException e) {
-            System.out.println("File not found: " + "prog5001_students_grade_2022.csv");
+            System.out.println("File not found: " + fileName);
         } 
         
         // Prompt the user to enter a threshold value
@@ -112,6 +112,9 @@ public class StudentMarkSystem
                 System.out.println(studentName + " ");
             }
         }
+        
+        
+    
 
     }
 }
