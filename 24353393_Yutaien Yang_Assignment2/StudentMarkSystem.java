@@ -15,8 +15,7 @@ public class StudentMarkSystem
         System.out.print("Please enter the file name: ");
         Scanner userInput = new Scanner(System.in);
         String fileName = userInput.nextLine();
-        //userInput.close();
-        ArrayList<String> studentList = new ArrayList<>();
+        ArrayList<Student> studentList = new ArrayList<>();//Save the data into the Student class, which will be created in subsequent code
         
         //Prevents errors if a file cannot be found
         try (Scanner scanner = new Scanner(new File(fileName))) {//read the file
@@ -118,3 +117,28 @@ public class StudentMarkSystem
 
     }
 }
+
+class Student {//Create a class to store the date of students
+    private String studentName;
+    private String studentID;
+    private double totalMark;
+    
+    public Student(String studentName, String studentID, double totalMark) {
+        this.studentName = studentName;
+        this.studentID = studentID;
+        this.totalMark = totalMark;
+    }
+
+    public String getName() {
+        return studentName;
+    }
+
+    public String getID() {
+        return studentID;
+    }
+
+    public double getTotalMark() {
+        return totalMark;
+    }
+}
+
