@@ -1,0 +1,20 @@
+Algorithm 3:
+
+Output a message: "Enter the threshold:"
+Read the threshold value from user input and store it in the variable threshold
+Close user input
+
+Add the student names and total scores to the ArrayList and separate the names and scores with commas
+
+Output a message: "Students with a total mark below the threshold " + threshold + ":"
+
+For each string  in studentList:
+    Split the student string using a comma and store the result in an array parts
+    Get the student's name(studentName) from parts[0]
+    Convert parts[1] to a double and store it in the variable totalMark
+
+    If totalMark < threshold:
+        Output  studentName
+        Output a blank line
+    End If
+End For
