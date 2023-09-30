@@ -7,12 +7,19 @@
  */
 import java.util.Scanner;
 import java.io.*;
+import java.util.ArrayList;
 
 public class StudentMarkSystem
 {
     public static void main (String[] args) {
+        System.out.print("Please enter the file name: ");
+        Scanner userInput = new Scanner(System.in);
+        String fileName = userInput.nextLine();
+        //userInput.close();
+        ArrayList<String> studentList = new ArrayList<>();
+        
         //Prevents errors if a file cannot be found
-        try (Scanner scanner = new Scanner(new File("prog5001_students_grade_2022.csv"))) {//read the file
+        try (Scanner scanner = new Scanner(new File(fileName))) {//read the file
             int lineCount = 0; //The valid data for the file starts on the third line, so set a counter
             
             while (scanner.hasNextLine()) {//Read line by line until there are no more lines
@@ -22,7 +29,7 @@ public class StudentMarkSystem
                 
                 if (lineCount == 1) {//Read the fist line and store the unit name
                     String unitName = parts[0] ;
-                    System.out.println("Name of unit: " + unitName);
+                    System.out.println(unitName);
                     System.out.println();
                     
                 } else if (lineCount >= 3) {//Skip the first two lines
@@ -73,6 +80,10 @@ public class StudentMarkSystem
                     System.out.println("Assignment3: " + assignment3);
                     System.out.println("Totals: " + totalMark);
                     System.out.println();
+                    
+                    String student = studentName + "," + totalMark;
+                    studentList.add(student);
+                                    
                     }
                 
             }
@@ -80,5 +91,27 @@ public class StudentMarkSystem
         catch (FileNotFoundException e) {
             System.out.println("File not found: " + "prog5001_students_grade_2022.csv");
         } 
+        
+        // Prompt the user to enter a threshold value
+        System.out.print("Enter the threshold: ");
+        double threshold = userInput.nextDouble(); // Store the threshold
+        userInput.close(); // Close the input scanner
+
+        System.out.println("Students with a total mark below the threshold " + threshold + ":");
+
+        // Iterate through the studentList
+        for (String student : studentList) {
+            // Split the student string into parts using a comma
+            String[] parts = student.split(",");
+            String studentName = parts[0]; // Get the student's name from parts[0]
+            double totalMark = Double.parseDouble(parts[1]); // Convert parts[1] to a double for totalMark
+
+            // Check if the totalMark is below the threshold
+            if (totalMark < threshold) {
+            // Print the student's name 
+                System.out.println(studentName + " ");
+            }
+        }
+
     }
 }
