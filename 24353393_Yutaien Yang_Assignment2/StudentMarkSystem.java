@@ -17,6 +17,26 @@ public class StudentMarkSystem
         String fileName = userInput.nextLine();
         ArrayList<Student> studentList = new ArrayList<>();//Save the data into the Student class, which will be created in subsequent code
         
+        boolean exit = true;//Creating a Boolean variable for subsequent implementation of the exit function
+        while (exit) {
+           System.out.println("Student Mark System");
+           System.out.println("1. Student information and scores");
+           System.out.println("2. Print students below the given threshold");
+           System.out.println("3. Top5 and bottom5 students");
+           System.out.println("4. exit");
+           System.out.println("Please use the numbers 1-4 to enter the option");
+           
+           int option = userInput.nextInt();//
+           
+           switch (option) {
+               
+           }
+           
+        }
+        
+        
+        
+        
         //Prevents errors if a file cannot be found
         try (Scanner scanner = new Scanner(new File(fileName))) {//read the file
             int lineCount = 0; //The valid data for the file starts on the third line, so set a counter
@@ -129,11 +149,11 @@ class Student {//Create a class to store the date of students
         this.totalMark = totalMark;
     }
 
-    public String getName() {
+    public String getStudentName() {
         return studentName;
     }
 
-    public String getID() {
+    public String getStudentID() {
         return studentID;
     }
 
