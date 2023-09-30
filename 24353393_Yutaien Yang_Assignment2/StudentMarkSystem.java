@@ -31,6 +31,9 @@ public class StudentMarkSystem
                     double assignment2;
                     double assignment3; 
                     
+                    //The student scores section of the file is empty in some places, 
+                    //and in other places there is no array at that location;
+                    //the following method defines both cases as 0 scores
                     if (parts.length >= 4) {
                         if (parts[3].isEmpty()) {
                             assignment1 = 0.0;
