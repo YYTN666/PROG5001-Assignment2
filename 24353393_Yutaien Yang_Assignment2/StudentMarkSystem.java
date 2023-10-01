@@ -13,6 +13,7 @@ public class StudentMarkSystem
 {
 
     public static void main (String[] args) {
+        
         System.out.print("Please enter the file name: ");
         Scanner userInput = new Scanner(System.in);
         String fileName = userInput.nextLine();
@@ -84,7 +85,9 @@ public class StudentMarkSystem
         } 
         
         boolean exit = true;//Creating a Boolean variable for subsequent implementation of the exit function
-        while (exit) {
+        while (exit) {//Create a loop so that the menu continues to pop up after the user selects an option
+           
+           //Menu style and prompts the user to enter a selection
            System.out.println("Student Mark System");
            System.out.println(unitName);
            System.out.println();
@@ -92,11 +95,24 @@ public class StudentMarkSystem
            System.out.println("2. Print students below the given threshold");
            System.out.println("3. Top5 and bottom5 students");
            System.out.println("4. exit");
-           System.out.println("Please use the numbers 1-4 to enter the option");
-           
-           int option = userInput.nextInt();//
-           switch (option) {
+           System.out.print("Please use the numbers 1-4 to enter the option: ");
+           int option = userInput.nextInt();//Storing user input
+           switch (option) {//Matching user input to options
                case 1:
+                    studentInformation(studentList);
+                    break;
+               case 2:
+                    System.out.print("Enter the threshold: ");// Prompt the user to enter a threshold value
+                    double threshold = userInput.nextDouble();// Store the threshold
+                    studentsBelowThreshold(studentList, threshold);
+                    break;     
+               case 3:
+                    studentInformation(studentList);
+                    break;
+               case 4:
+                    studentInformation(studentList);
+                    break;
+               default:
                     studentInformation(studentList);
                     break;
            }
@@ -104,7 +120,8 @@ public class StudentMarkSystem
         }
     }  
     
-    public static void studentInformation(ArrayList<Student> studentList) {        
+    public static void studentInformation(ArrayList<Student> studentList) {//To print students' information        
+
         for (Student student : studentList) {
             System.out.println("Student " + student.getOrdinalNumber() + " Name: " + student.getStudentName());
             System.out.println("Student " + student.getOrdinalNumber() + " ID: " + student.getStudentID());
@@ -115,11 +132,21 @@ public class StudentMarkSystem
             System.out.println();
         }
         
+        }
         
+    public static void studentsBelowThreshold(ArrayList<Student> studentList, double threshold) {//To print students' information        
+        System.out.println("Students with a total mark below the threshold " + threshold + ":");
+        for (Student student : studentList) {
+            if (student.getTotalMark() < threshold) {
+                System.out.println(student.getStudentName());
+            }
+        }
+        System.out.println();
         }
     }  
 
-class Student {//Create a class to store the date of students
+class Student {//Create a class to store the date of student
+    
     private String studentName;
     private String studentID;
     private double assignment1;
@@ -166,4 +193,7 @@ class Student {//Create a class to store the date of students
         return ordinalNumber;
     }
 }
+
+        
+    
 
