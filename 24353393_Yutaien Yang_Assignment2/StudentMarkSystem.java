@@ -107,21 +107,20 @@ public class StudentMarkSystem
                     studentsBelowThreshold(studentList, threshold);
                     break;     
                case 3:
-                    studentInformation(studentList);
+                    topAndBottomStudents(studentList);
                     break;
                case 4:
-                    studentInformation(studentList);
+                    exit = false;
                     break;
                default:
-                    studentInformation(studentList);
+                    System.out.println("Please enter a number between 1 and 4");
                     break;
            }
            
         }
     }  
     
-    public static void studentInformation(ArrayList<Student> studentList) {//To print students' information        
-
+    public static void studentInformation(ArrayList<Student> studentList) {//Function to print students' information        
         for (Student student : studentList) {
             System.out.println("Student " + student.getOrdinalNumber() + " Name: " + student.getStudentName());
             System.out.println("Student " + student.getOrdinalNumber() + " ID: " + student.getStudentID());
@@ -134,7 +133,8 @@ public class StudentMarkSystem
         
         }
         
-    public static void studentsBelowThreshold(ArrayList<Student> studentList, double threshold) {//To print students' information        
+    public static void studentsBelowThreshold(ArrayList<Student> studentList, double threshold) {//Function to Print students who scored below a certain threshold   
+        
         System.out.println("Students with a total mark below the threshold " + threshold + ":");
         for (Student student : studentList) {
             if (student.getTotalMark() < threshold) {
@@ -142,9 +142,39 @@ public class StudentMarkSystem
             }
         }
         System.out.println();
+        
         }
-    }  
+        
+    public static void topAndBottomStudents(ArrayList<Student> studentList) {// Function to print top5 and bottom5 students
+        // Sort the student list by total marks using bubble sort
+        int n = studentList.size();
+        for (int i = 0; i < n ; i++) {
+            for (int j = 1; j < n - i ; j++) {
+                if (studentList.get(j - 1).getTotalMark() > studentList.get(j).getTotalMark()) {
+                    Student temp = studentList.get(j);
+                    studentList.set(j, studentList.get(j - 1));
+                    studentList.set(j - 1, temp);
+                }
+            }
+        }
 
+        System.out.println("Top5 Students:");
+        for (int i = n - 1; i >= n - 5 && i >= 0; i--) {
+            Student student = studentList.get(i);
+            System.out.println(student.getStudentName() + " - " + student.getTotalMark());
+        }
+        System.out.println();
+        System.out.println("Bottom5 Students:");
+        for (int i = 0; i < 5 && i < n; i++) {
+            Student student = studentList.get(i);
+            System.out.println(student.getStudentName() + " - " + student.getTotalMark());
+        }
+        System.out.println();
+        
+    }   
+}  
+
+    
 class Student {//Create a class to store the date of student
     
     private String studentName;
@@ -192,8 +222,5 @@ class Student {//Create a class to store the date of student
     public int getOrdinalNumber() {
         return ordinalNumber;
     }
-}
-
-        
     
-
+}

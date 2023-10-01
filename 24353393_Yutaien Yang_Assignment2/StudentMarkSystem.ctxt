@@ -6,4 +6,6 @@ comment2.params=studentList
 comment2.target=void\ studentInformation(java.util.ArrayList)
 comment3.params=studentList\ threshold
 comment3.target=void\ studentsBelowThreshold(java.util.ArrayList,\ double)
-numComments=4
+comment4.params=studentList
+comment4.target=void\ topAndBottomStudents(java.util.ArrayList)
+numComments=5
