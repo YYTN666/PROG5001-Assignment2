@@ -11,31 +11,13 @@ import java.util.ArrayList;
 
 public class StudentMarkSystem
 {
+
     public static void main (String[] args) {
         System.out.print("Please enter the file name: ");
         Scanner userInput = new Scanner(System.in);
         String fileName = userInput.nextLine();
         ArrayList<Student> studentList = new ArrayList<>();//Save the data into the Student class, which will be created in subsequent code
-        
-        boolean exit = true;//Creating a Boolean variable for subsequent implementation of the exit function
-        while (exit) {
-           System.out.println("Student Mark System");
-           System.out.println("1. Student information and scores");
-           System.out.println("2. Print students below the given threshold");
-           System.out.println("3. Top5 and bottom5 students");
-           System.out.println("4. exit");
-           System.out.println("Please use the numbers 1-4 to enter the option");
-           
-           int option = userInput.nextInt();//
-           
-           switch (option) {
-               
-           }
-           
-        }
-        
-        
-        
+        String unitName = "";
         
         //Prevents errors if a file cannot be found
         try (Scanner scanner = new Scanner(new File(fileName))) {//read the file
@@ -47,9 +29,7 @@ public class StudentMarkSystem
                 String[] parts = input.split(",");//Break the content into pieces 
                 
                 if (lineCount == 1) {//Read the fist line and store the unit name
-                    String unitName = parts[0] ;
-                    System.out.println(unitName);
-                    System.out.println();
+                    unitName = parts[0] ;
                     
                 } else if (lineCount >= 3) {//Skip the first two lines
                     String studentName = parts[0] + " " + parts[1];
@@ -57,7 +37,7 @@ public class StudentMarkSystem
                     double assignment1;
                     double assignment2;
                     double assignment3; 
-                    
+
                     //The student scores section of the file is empty in some places, 
                     //and in other places there is no array at that location;
                     //the following method defines both cases as 0 scores
@@ -90,63 +70,72 @@ public class StudentMarkSystem
                     } else {
                         assignment3 = 0.0;
                     }
-    
-                    double totalMark = assignment1 + assignment2 + assignment3;
-                    System.out.println("Student " + (lineCount - 2) + " Name: " + studentName);
-                    System.out.println("Student " + (lineCount - 2) + " ID: " + studentID);
-                    System.out.print("Assignment1: " + assignment1 + ", ");
-                    System.out.print("Assignment2: " + assignment2+ ", ");
-                    System.out.println("Assignment3: " + assignment3);
-                    System.out.println("Totals: " + totalMark);
-                    System.out.println();
                     
-                    String student = studentName + "," + totalMark;
+                    double totalMark = assignment1 + assignment2 + assignment3;
+                    int ordinalNumber = lineCount - 2;
+                    Student student = new Student(studentName, studentID, assignment1, assignment2, assignment3, totalMark, ordinalNumber);
                     studentList.add(student);
-                                    
-                    }
-                
+                    
+                }
             }
         }
         catch (FileNotFoundException e) {
             System.out.println("File not found: " + fileName);
         } 
         
-        // Prompt the user to enter a threshold value
-        System.out.print("Enter the threshold: ");
-        double threshold = userInput.nextDouble(); // Store the threshold
-        userInput.close(); // Close the input scanner
-
-        System.out.println("Students with a total mark below the threshold " + threshold + ":");
-
-        // Iterate through the studentList
-        for (String student : studentList) {
-            // Split the student string into parts using a comma
-            String[] parts = student.split(",");
-            String studentName = parts[0]; // Get the student's name from parts[0]
-            double totalMark = Double.parseDouble(parts[1]); // Convert parts[1] to a double for totalMark
-
-            // Check if the totalMark is below the threshold
-            if (totalMark < threshold) {
-            // Print the student's name 
-                System.out.println(studentName + " ");
-            }
+        boolean exit = true;//Creating a Boolean variable for subsequent implementation of the exit function
+        while (exit) {
+           System.out.println("Student Mark System");
+           System.out.println(unitName);
+           System.out.println();
+           System.out.println("1. Student information and scores");
+           System.out.println("2. Print students below the given threshold");
+           System.out.println("3. Top5 and bottom5 students");
+           System.out.println("4. exit");
+           System.out.println("Please use the numbers 1-4 to enter the option");
+           
+           int option = userInput.nextInt();//
+           switch (option) {
+               case 1:
+                    studentInformation(studentList);
+                    break;
+           }
+           
+        }
+    }  
+    
+    public static void studentInformation(ArrayList<Student> studentList) {        
+        for (Student student : studentList) {
+            System.out.println("Student " + student.getOrdinalNumber() + " Name: " + student.getStudentName());
+            System.out.println("Student " + student.getOrdinalNumber() + " ID: " + student.getStudentID());
+            System.out.print("Assignment1: " + student.getAssignment1() + ", ");
+            System.out.print("Assignment2: " + student.getAssignment2() + ", ");
+            System.out.println("Assignment3: " + student.getAssignment3());
+            System.out.println("Total: " + student.getTotalMark());
+            System.out.println();
         }
         
         
-    
-
-    }
-}
+        }
+    }  
 
 class Student {//Create a class to store the date of students
     private String studentName;
     private String studentID;
+    private double assignment1;
+    private double assignment2;
+    private double assignment3;
     private double totalMark;
+    private int ordinalNumber;
     
-    public Student(String studentName, String studentID, double totalMark) {
+    public Student(String studentName, String studentID, double assignment1, double assignment2, double assignment3, double totalMark, int ordinalNumber) {
         this.studentName = studentName;
         this.studentID = studentID;
+        this.assignment1 = assignment1;
+        this.assignment2 = assignment2;
+        this.assignment3 = assignment3;
         this.totalMark = totalMark;
+        this.ordinalNumber = ordinalNumber;
     }
 
     public String getStudentName() {
@@ -157,8 +146,24 @@ class Student {//Create a class to store the date of students
         return studentID;
     }
 
+    public double getAssignment1() {
+        return assignment1;
+    }
+    
+    public double getAssignment2() {
+        return assignment2;
+    }
+    
+    public double getAssignment3() {
+        return assignment3;
+    }
+    
     public double getTotalMark() {
         return totalMark;
+    }
+    
+    public int getOrdinalNumber() {
+        return ordinalNumber;
     }
 }
 

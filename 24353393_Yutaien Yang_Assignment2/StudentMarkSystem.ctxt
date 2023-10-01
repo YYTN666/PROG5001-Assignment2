@@ -2,4 +2,6 @@
 comment0.target=StudentMarkSystem
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
-numComments=2
+comment2.params=studentList
+comment2.target=void\ studentInformation(java.util.ArrayList)
+numComments=3
