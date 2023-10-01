@@ -157,7 +157,7 @@ public class StudentMarkSystem
                 }
             }
         }
-
+        System.out.println();
         System.out.println("Top5 Students:");
         for (int i = n - 1; i >= n - 5 && i >= 0; i--) {
             Student student = studentList.get(i);
